@@ -1,0 +1,30 @@
+<h1>Tous les Evenements Prives</h1>
+<ul>
+    <% @events.each do |event| %>
+     <li><strong>Liu :</strong> <%= event.location %> - <strong>Date :</strong> <%= event.date %></li>
+    <% end %>
+</ul>
+
+<div class="navigation">
+    <% if user_signed_in? %>
+     <%= link_to "Creer un Evenement", new_event_path %> |
+     <%= link_to "Mon Profil", user_path(current_user) %> |
+     <%= link_to "Se deconnecter", destroy_user_session_path, data: { turbo_method: :delete} %>
+    <% else%>
+     <%= link_to "Se connecter", new_user_session_path %> |
+     <%= link_to "S'inscrire", new_user_registration_path %>
+    <% end %>
+</div>
+
+<h2> Evenements a venir </h2>
+<ul>
+    <% @upcoming_events.each do |event| %>
+      <li><%= link_to event.location, event %> -<%= event.date %></li>
+    <% end %>
+</ul>
+<h2> Evenements passes </h2>
+<ul>
+    <%@past_events.each do |event| %>
+      <li><%= link_to event.location, event %> - <%= event.date %></li>
+    <% end%>
+</ul>
